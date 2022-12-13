@@ -1,4 +1,4 @@
-# multiproc_video_generator
+# stream_video_generator
 
 A minimal code example powered by [torchdata](https://github.com/pytorch/data) for runtime video frames generation.
 
