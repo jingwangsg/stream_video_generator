@@ -23,17 +23,18 @@ def get_video_generator(video_ids):
     dataset_dp = IterableWrapper([dict(video_id=video_id) for video_id in video_ids])
     num_videos = len(dataset_dp)
     dataset_dp = prepare_for_dataloader(dataset_dp, shuffle=False)
-    dataset_dp = dataset_dp.download_youtube(cache_dir="./videos",
-                                             video_format="worst[height>=224][ext=mp4]",
+    dataset_dp = dataset_dp.download_youtube(video_format="worst[height>=224][ext=mp4]",
+                                             to_buffer=True,
+                                             to_file=False,
                                              from_key="video_id",
                                              quiet=quiet)
-    dataset_dp = dataset_dp.rename(["video_id.vid_path"], ["video_path"])
+    dataset_dp = dataset_dp.rename(["video_id.buffer"], ["video_buffer"])
     dataset_dp = dataset_dp.load_frames_decord(
-        from_key="video_path",
+        from_key="video_buffer",
         width=224,
         height=224,
         #    stride=5,
-        to_array=True).rename(["video_path.frame_arr"], ["video_array"])
+        to_array=True).rename(["video_buffer.frame_arr"], ["video_array"])
     # dataset_dp = dataset_dp.load_frames_ffmpeg(from_key="video_path",
     #                                            to_images=True,
     #                                            to_array=True,
