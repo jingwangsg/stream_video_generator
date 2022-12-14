@@ -10,4 +10,4 @@ Large num_workers and prefetch_workers are not recommended, since too many proce
 
 Add function of **downloading videos to buffer directly**, instead of dumping videos to hard drive first.
 
-Using this function by set to_file=False, to_buffer=True in YoutubeDownloader
+Use this function by setting to_file=False, to_buffer=True in YoutubeDownloader
